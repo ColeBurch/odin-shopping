@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InjectBodyPlugin = require("inject-body-webpack-plugin").default;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = (env, argv) => {
   return {
@@ -12,6 +13,7 @@ module.exports = (env, argv) => {
     devtool: "inline-source-map",
     devServer: {
       static: "./dist",
+      historyApiFallback: true,
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -51,6 +53,10 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
+      modules: ["node_modules"],
+      plugins: [
+        new TsconfigPathsPlugin({ extensions: [".tsx", ".ts", ".js"] }),
+      ],
       extensions: [".tsx", ".ts", ".js"],
     },
     optimization: {
