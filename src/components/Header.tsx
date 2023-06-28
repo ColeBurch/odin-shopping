@@ -69,7 +69,7 @@ const Header = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5">
+          <a href="/" className="-m-1.5 p-1.5" data-testid="logo-button">
             <span className="sr-only">Your Company</span>
             <img className="h-8 w-auto" src={CoffeeSVG} alt="" />
           </a>
@@ -156,7 +156,11 @@ const Header = () => {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a
+            href="/cart"
+            className="text-sm font-semibold leading-6 text-gray-900"
+            data-testid="cart-button"
+          >
             <ShoppingCartIcon className="h-7 w-auto flex-none" />
           </a>
         </div>
@@ -200,7 +204,7 @@ const Header = () => {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products, ...callsToAction].map((item) => (
+                        {[...products].map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"
