@@ -5,12 +5,12 @@ import Footer from "../components/Footer";
 
 const App = () => {
   return (
-    <div className="font-sans antialiased text-gray-600 min-h-full flex flex-col">
+    <main className="font-sans antialiased text-gray-600 min-h-full flex flex-col">
       <Header />
       <div>This is from App</div>
       <MainBox />
       <Footer />
-    </div>
+    </main>
   );
 };
 
