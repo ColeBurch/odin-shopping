@@ -5,11 +5,11 @@ import Footer from "../components/Footer";
 
 const Store = () => {
   return (
-    <div className="font-sans antialiased text-gray-600 min-h-full flex flex-col">
+    <main className="font-sans antialiased text-gray-600 min-h-full flex flex-col">
       <Header />
       <StorePage />
       <Footer />
-    </div>
+    </main>
   );
 };
 
