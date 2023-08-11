@@ -9,6 +9,43 @@ const hatImage = require("./images/hatImage.jpg");
 const watchImage = require("./images/watchImage.jpg");
 
 export const ProductContext = React.createContext({ products: [] });
+export const CartContext = React.createContext(null);
+
+type cartStateType = {
+  id: number;
+  quantity: number;
+}[];
+
+type cartAction = {
+  type: string;
+  payload: {
+    id: number;
+    quantity: number;
+  };
+};
+
+const cartInitialState: cartStateType = [];
+const reducer = (state: cartStateType, action: cartAction) => {
+  switch (action.type) {
+    case "ADD_TO_CART":
+      if (state.some((item) => item.id === action.payload.id)) {
+        const stateIndex = state.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        const newState = [...state];
+        newState[stateIndex].quantity += 0.5;
+        return newState;
+      } else {
+        return [...state, action.payload];
+      }
+    case "REMOVE_FROM_CART":
+      return state;
+    case "CLEAR_CART":
+      return cartInitialState;
+    default:
+      return state;
+  }
+};
 
 const RouteSwitch = () => {
   const products = [
@@ -60,14 +97,34 @@ const RouteSwitch = () => {
     },
   ];
 
+  const [cart, dispatch] = React.useReducer(reducer, cartInitialState);
+
+  React.useEffect(() => {
+    const cart = window.localStorage.getItem("cart");
+    if (cart) {
+      const parsedCart = JSON.parse(cart);
+      parsedCart.forEach((item: any) => {
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: { id: item.id, quantity: item.quantity },
+        });
+      });
+    }
+  }, []);
+  React.useEffect(() => {
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+  });
+
   return (
     <ProductContext.Provider value={{ products: products }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/store" element={<Store />} />
-        </Routes>
-      </BrowserRouter>
+      <CartContext.Provider value={{ cartState: cart, cartDispatch: dispatch }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/store" element={<Store />} />
+          </Routes>
+        </BrowserRouter>
+      </CartContext.Provider>
     </ProductContext.Provider>
   );
 };

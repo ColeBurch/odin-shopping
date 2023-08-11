@@ -1,9 +1,11 @@
 import * as React from "react";
 import { useContext } from "react";
 import { ProductContext } from "../RouteSwitch";
+import { CartContext } from "../RouteSwitch";
 
 const StorePage = () => {
   const products = useContext(ProductContext);
+  const cartContext = useContext(CartContext);
 
   return (
     <div className="bg-white">
@@ -26,7 +28,7 @@ const StorePage = () => {
                 <div>
                   <h3 className="text-sm text-gray-700">
                     <a href={product.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
+                      <span aria-hidden="true" className="absolute inset-10" />
                       {product.name}
                     </a>
                   </h3>
@@ -36,6 +38,17 @@ const StorePage = () => {
                   {product.price}
                 </p>
               </div>
+              <button
+                onClick={() =>
+                  cartContext.cartDispatch({
+                    type: "ADD_TO_CART",
+                    payload: { id: product.id, quantity: 1 },
+                  })
+                }
+                className="mt-4 block w-full bg-gray-800 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900"
+              >
+                add to cart
+              </button>
             </div>
           ))}
         </div>
