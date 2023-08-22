@@ -156,7 +156,7 @@ const Header = () => {
           </Popover>
 
           <a
-            href="/store"
+            href="/odin-shopping/store"
             className="text-md font-semibold leading-6 text-gray-900"
           >
             Marketplace
