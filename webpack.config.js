@@ -6,7 +6,7 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = (env, argv) => {
   return {
-    mode: "development",
+    mode: "production",
     entry: {
       index: "./src/index.tsx",
     },
@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: "Development",
+        title: "Odin Store",
       }),
       new InjectBodyPlugin({
         content: "<main id=root></main>",
