@@ -121,8 +121,8 @@ const RouteSwitch = () => {
       <CartContext.Provider value={{ cartState: cart, cartDispatch: dispatch }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/store" element={<Store />} />
+            <Route path="/odin-shopping/" element={<App />} />
+            <Route path="/odin-shopping/store" element={<Store />} />
           </Routes>
         </BrowserRouter>
       </CartContext.Provider>
