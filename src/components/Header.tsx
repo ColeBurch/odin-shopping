@@ -18,6 +18,12 @@ const ShoeSVG = require("../images/shoe.svg");
 const HatSVG = require("../images/hat.svg");
 const WatchSVG = require("../images/watch.svg");
 import { CartContext } from "../RouteSwitch";
+import { ProductContext } from "../RouteSwitch";
+
+type cartProductType = {
+  id: number;
+  quantity: number;
+};
 
 const products = [
   {
@@ -55,32 +61,6 @@ const callsToAction = [
   { name: "See it in action", href: "#", icon: PlayCircleIcon },
   { name: "Contact support", href: "#", icon: PhoneIcon },
 ];
-const products2 = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-];
 
 function classNames(...classes: Array<string | boolean | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -90,6 +70,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const cartContext = React.useContext(CartContext);
   const [cartPreviewOpen, setCartPreviewOpen] = React.useState(true);
+  const productContext = React.useContext(ProductContext);
 
   return (
     <header className="bg-white">
@@ -343,47 +324,89 @@ const Header = () => {
                               role="list"
                               className="-my-6 divide-y divide-gray-200"
                             >
-                              {products2.map((product) => (
-                                <li key={product.id} className="flex py-6">
-                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img
-                                      src={product.imageSrc}
-                                      alt={product.imageAlt}
-                                      className="h-full w-full object-cover object-center"
-                                    />
-                                  </div>
-
-                                  <div className="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>
-                                          <a href={product.href}>
-                                            {product.name}
-                                          </a>
-                                        </h3>
-                                        <p className="ml-4">{product.price}</p>
-                                      </div>
-                                      <p className="mt-1 text-sm text-gray-500">
-                                        {product.color}
-                                      </p>
+                              {cartContext.cartState.map(
+                                (cartProduct: cartProductType) => (
+                                  <li
+                                    key={cartProduct.id}
+                                    className="flex py-6"
+                                  >
+                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                      <img
+                                        src={
+                                          productContext.products.find(
+                                            (product) =>
+                                              product.id === cartProduct.id
+                                          )?.imageSrc
+                                        }
+                                        alt={
+                                          productContext.products.find(
+                                            (product) =>
+                                              product.id === cartProduct.id
+                                          )?.imageAlt
+                                        }
+                                        className="h-full w-full object-cover object-center"
+                                      />
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">
-                                        Qty {product.quantity}
-                                      </p>
 
-                                      <div className="flex">
-                                        <button
-                                          type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
-                                        >
-                                          Remove
-                                        </button>
+                                    <div className="ml-4 flex flex-1 flex-col">
+                                      <div>
+                                        <div className="flex justify-between text-base font-medium text-gray-900">
+                                          <h3>
+                                            <a
+                                              href={
+                                                productContext.products.find(
+                                                  (product) =>
+                                                    product.id ===
+                                                    cartProduct.id
+                                                )?.href
+                                              }
+                                            >
+                                              {
+                                                productContext.products.find(
+                                                  (product) =>
+                                                    product.id ===
+                                                    cartProduct.id
+                                                )?.name
+                                              }
+                                            </a>
+                                          </h3>
+                                          <p className="ml-4">
+                                            $
+                                            {
+                                              productContext.products.find(
+                                                (product) =>
+                                                  product.id === cartProduct.id
+                                              )?.price
+                                            }
+                                          </p>
+                                        </div>
+                                        <p className="mt-1 text-sm text-gray-500">
+                                          {
+                                            productContext.products.find(
+                                              (product) =>
+                                                product.id === cartProduct.id
+                                            )?.color
+                                          }
+                                        </p>
+                                      </div>
+                                      <div className="flex flex-1 items-end justify-between text-sm">
+                                        <p className="text-gray-500">
+                                          Qty {cartProduct.quantity}
+                                        </p>
+
+                                        <div className="flex">
+                                          <button
+                                            type="button"
+                                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </li>
-                              ))}
+                                  </li>
+                                )
+                              )}
                             </ul>
                           </div>
                         </div>
@@ -392,7 +415,18 @@ const Header = () => {
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
-                          <p>$262.00</p>
+                          <p>
+                            $
+                            {cartContext.cartState.reduce(
+                              (accumulator: number, item: any) =>
+                                accumulator +
+                                item.quantity *
+                                  productContext.products.find(
+                                    (product) => product.id === item.id
+                                  )?.price,
+                              0
+                            )}
+                          </p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
                           Shipping and taxes calculated at checkout.

@@ -55,7 +55,7 @@ const RouteSwitch = () => {
       href: "#",
       imageSrc: ShirtImage,
       imageAlt: "Front of men's Basic Tee in black.",
-      price: "$35",
+      price: 35,
       color: "Black",
     },
     {
@@ -64,7 +64,7 @@ const RouteSwitch = () => {
       href: "#",
       imageSrc: PantsImage,
       imageAlt: "Front of men's Basic Pants in blue.",
-      price: "$55",
+      price: 55,
       color: "Blue",
     },
     {
@@ -73,7 +73,7 @@ const RouteSwitch = () => {
       href: "#",
       imageSrc: ShoeImage,
       imageAlt: "Side profile of Basic Shoe in white.",
-      price: "$50",
+      price: 50,
       color: "White",
     },
     {
@@ -82,7 +82,7 @@ const RouteSwitch = () => {
       href: "#",
       imageSrc: hatImage,
       imageAlt: "Basic Hat in earth.",
-      price: "$20",
+      price: 20,
       color: "Earth",
     },
     {
@@ -92,7 +92,7 @@ const RouteSwitch = () => {
       imageSrc: watchImage,
       imageAlt:
         "Watch with white face, brown leather band, stainless steel hardware.",
-      price: "$180",
+      price: 180,
       color: "White",
     },
   ];
