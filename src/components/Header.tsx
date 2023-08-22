@@ -395,6 +395,15 @@ const Header = () => {
                                         <div className="flex">
                                           <button
                                             type="button"
+                                            onClick={() =>
+                                              cartContext.cartDispatch({
+                                                type: "REMOVE_FROM_CART",
+                                                payload: {
+                                                  id: cartProduct.id,
+                                                  quantity: 1,
+                                                },
+                                              })
+                                            }
                                             className="font-medium text-indigo-600 hover:text-indigo-500"
                                           >
                                             Remove
