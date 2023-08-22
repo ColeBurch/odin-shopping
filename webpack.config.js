@@ -27,6 +27,7 @@ module.exports = (env, argv) => {
       filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
       clean: true,
+      publicPath: "/odin-shopping/",
     },
     module: {
       rules: [
