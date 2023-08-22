@@ -69,7 +69,7 @@ function classNames(...classes: Array<string | boolean | undefined>) {
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const cartContext = React.useContext(CartContext);
-  const [cartPreviewOpen, setCartPreviewOpen] = React.useState(true);
+  const [cartPreviewOpen, setCartPreviewOpen] = React.useState(false);
   const productContext = React.useContext(ProductContext);
 
   return (
@@ -166,10 +166,10 @@ const Header = () => {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="/cart"
+          <button
             className="text-sm font-semibold leading-6 text-gray-900 flex"
             data-testid="cart-button"
+            onClick={() => setCartPreviewOpen(true)}
           >
             <ShoppingCartIcon className="h-7 w-auto flex-none" />
             <div>
@@ -178,7 +178,7 @@ const Header = () => {
                 0
               )}
             </div>
-          </a>
+          </button>
         </div>
       </nav>
       <Dialog
@@ -248,13 +248,11 @@ const Header = () => {
                 </a>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 flex"
-                >
+                <button className="-mx-3 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 flex">
                   <ShoppingCartIcon
                     className="h-7 w-auto flex-none"
                     aria-hidden="true"
+                    onClick={() => setCartPreviewOpen(true)}
                   />
                   <div>
                     {cartContext.cartState.reduce(
@@ -263,7 +261,7 @@ const Header = () => {
                       0
                     )}
                   </div>
-                </a>
+                </button>
               </div>
             </div>
           </div>
