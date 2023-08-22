@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./pages/App";
 import Store from "./pages/Store";
 const ShirtImage = require("./images/shirtImage.jpg");
@@ -119,12 +119,12 @@ const RouteSwitch = () => {
   return (
     <ProductContext.Provider value={{ products: products }}>
       <CartContext.Provider value={{ cartState: cart, cartDispatch: dispatch }}>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/store" element={<Store />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </CartContext.Provider>
     </ProductContext.Provider>
   );
