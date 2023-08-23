@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
       filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
       clean: true,
-      publicPath: "/",
+      publicPath: "https://coleburch.github.io/odin-shopping/",
     },
     module: {
       rules: [
