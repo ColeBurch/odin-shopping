@@ -79,7 +79,7 @@ const Header = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5" data-testid="logo-button">
+          <a href="#/" className="-m-1.5 p-1.5" data-testid="logo-button">
             <span className="sr-only">Your Company</span>
             <img className="h-8 w-auto" src={CoffeeSVG} alt="" />
           </a>
@@ -156,7 +156,7 @@ const Header = () => {
           </Popover>
 
           <a
-            href="/store"
+            href="#/store"
             className="text-md font-semibold leading-6 text-gray-900"
           >
             Marketplace
@@ -235,7 +235,7 @@ const Header = () => {
                   )}
                 </Disclosure>
                 <a
-                  href="/store"
+                  href="#/store"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Marketplace
